@@ -50,6 +50,7 @@ func solution(_ denum1:Int, _ num1:Int, _ denum2:Int, _ num2:Int) -> [Int] {
 
 ```
 1부터 분자 분모 중 더 작은 수까지 배열 생성 후 .filter 메소드를 사용해 조건에 맞는 요소만으로 이루어진 배열 재생성, .max()로 최대공약수
+- map과 filter의 차이?
 
 
 ## 더 나은 방법?
