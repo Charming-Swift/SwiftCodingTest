@@ -1,0 +1,25 @@
+import Foundation
+
+// 참고 : https://velog.io/@jqdjhy/프로그래머스-파이썬-조이스틱-Greedy
+
+func solution(_ name:String) -> Int {
+    var cnt = 0 
+    var arr = name.map{String($0)}
+    
+    var minMove = arr.count - 1
+   
+    for i in (0..<arr.count) {
+        var uni = Int( UnicodeScalar(arr[i])!.value )
+        cnt += min(uni - 65, 91 - uni)
+        
+        var next = i + 1
+        while next < arr.count && arr[next] == "A" {
+            next += 1
+        }
+        
+        minMove = min(minMove, 2 * i + name.count - next, i + 2 * (name.count-next))
+        
+    }
+    
+    return cnt + minMove
+}
