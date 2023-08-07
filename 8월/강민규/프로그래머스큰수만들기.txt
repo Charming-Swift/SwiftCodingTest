@@ -1,0 +1,24 @@
+import Foundation
+
+func solution(_ number:String, _ k:Int) -> String {
+    var stack: [Int] = []
+    var cnt = k
+    var arr = number.map{Int(String($0))!}
+    
+    // O(n) 
+    for i in arr {
+        while cnt > 0 && !stack.isEmpty && stack.last! < i {
+            _ = stack.popLast()
+            cnt -= 1
+        }
+        stack.append(i)
+    }
+    
+    // 앞의 숫자보다 작은 수가 없는 경우 cnt가 남아서 잘라줘야한다.
+    if cnt > 0 {
+        var cnt = stack.count
+        stack = Array(stack[0..<cnt-1])
+    }
+    
+    return stack.map{String($0)}.joined()
+}
