@@ -1,0 +1,35 @@
+import Foundation
+
+func solution(_ n:Int, _ k:Int) -> Int {
+    var samjinsoo: [String] = makeBinary(n: n, k: k)
+    var arr = samjinsoo.joined().components(separatedBy: "0")
+    var result = 0
+    
+    for i in arr {
+        if let i = Int(i) {
+            if isPrime(i) { result += 1 }
+        }
+    }
+    return result
+}
+
+func isPrime(_ num: Int) -> Bool {
+    if num <= 1 { return false } 
+    if num >= 4 {
+        for i in 2...Int(sqrt(Double(num))) {
+            if num % i == 0 { return false }
+        }
+    }
+    return true
+}
+
+func makeBinary(n: Int, k: Int) -> [String] {
+    var n = n
+    var result: [String] = []
+    
+    while n != 0 {
+        result.append(String(n % k))
+        n = n / k
+    } 
+    return result.reversed()
+}
