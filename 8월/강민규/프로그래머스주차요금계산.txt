@@ -1,0 +1,69 @@
+import Foundation
+
+func solution(_ fees:[Int], _ records:[String]) -> [Int] {
+    var timeChecker: [String: String] = [:] // 들어온 시간 체크 (차량 번호: 들어온 시간)
+    var nujeok: [String: Int] = [:] // 누적 주차
+    var result: [(String, Int)] = []
+    
+    for record in records {
+        var record = record.components(separatedBy: " ").map{$0}
+        var time = record[0]
+        var num = record[1]
+        var isIn = record[2] == "IN" ? true : false
+        
+        // 1. 입, 출 확인
+        if isIn {
+            // 2. 차량 번호, 시간 스타트
+            timeChecker[num] = time
+            
+        } 
+        if isIn == false {
+            // 2. 차량 번호 확인
+            var start = timeChecker[num]!
+            var end = time
+            // 3. 시간 종료 및 계산
+            var nujeokTime = allTime(inTime: start, outTime: end)
+            timeChecker[num] = nil
+            // 4. 시간 누적 
+            if let n = nujeok[num] {
+                nujeok[num] = n + nujeokTime
+            } else {
+                nujeok[num] = nujeokTime
+            }
+            
+        }
+    }
+    
+    // 안나간 차 정산
+    for (key, value) in timeChecker {
+        if let n = nujeok[key] {
+            nujeok[key] = n + allTime(inTime: value, outTime: "23:59")
+        } else {
+            nujeok[key] = allTime(inTime: value, outTime: "23:59")
+        }
+        timeChecker[key] = nil
+    }
+    
+    print(nujeok, timeChecker)
+    // 정산    
+    for (key, value) in nujeok {
+        if value <= fees[0] {
+            result.append((key, fees[1]))
+        } else { 
+            var t = fees[1] + Int(ceil( Double(value - fees[0]) / Double(fees[2])) * Double(fees[3]))
+            result.append((key, t))
+        }
+    }
+    print(result)
+    return result.sorted{$0.0 < $1.0}.map{$0.1}
+}
+
+func allTime(inTime: String, outTime: String) -> Int {
+    var start = inTime.components(separatedBy: ":").map{Int($0)!}
+    var end = outTime.components(separatedBy: ":").map{Int($0)!}
+    var startTime = start[0] * 60 + start[1]
+    var endTime = end[0] * 60 + end[1]
+    
+    return endTime - startTime
+}
+
