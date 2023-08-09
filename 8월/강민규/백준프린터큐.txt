@@ -1,0 +1,33 @@
+import Foundation
+
+var t = Int(readLine()!)!
+
+(0..<t).forEach { _ in
+    var input = readLine()!.components(separatedBy: " ").map{Int(String($0))!}
+    var count = input[0]
+    var want = input[1]
+    
+    var docs = readLine()!.components(separatedBy: " ").map{Int(String($0))!}
+
+    var result = 0
+    
+    while true {
+        var max = docs.max()!
+        var front = docs.removeFirst()
+        want -= 1
+        
+        if max == front {
+            result += 1
+            if want < 0 {
+                print(result)
+                break
+            }
+        }
+        else {
+            docs.append(front)
+            if want < 0 {
+                want = docs.count - 1
+            }
+        }
+    }
+}
