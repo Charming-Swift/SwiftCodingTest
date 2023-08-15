@@ -1,0 +1,15 @@
+import Foundation
+
+func solution(_ t:String, _ p:String) -> Int {
+    var cnt = 0
+    var arr = t.map{$0}
+    for i in (0..<t.count-p.count+1) {
+        var num = Int(arr[i...i+p.count-1].map{String($0)}.joined())!
+        var tar = Int(p)!
+        if  num <= Int(p)! {
+            cnt += 1
+        }
+    }
+    
+    return cnt
+}
