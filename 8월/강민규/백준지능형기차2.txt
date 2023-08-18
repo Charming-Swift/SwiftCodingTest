@@ -1,0 +1,19 @@
+import Foundation
+
+var arr: [[Int]] = []
+(0..<10).forEach { _ in
+    var input = readLine()!.components(separatedBy: " ").map{Int(String($0))!}
+    arr.append([input[0], input[1]])
+}
+
+var jungwon = 0
+var max = 0
+for i in arr {
+    jungwon -= i[0]
+    jungwon += i[1]
+    if max < jungwon {
+        max = jungwon
+    }
+}
+
+print(max)
