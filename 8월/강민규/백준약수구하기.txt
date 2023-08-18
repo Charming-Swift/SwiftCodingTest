@@ -1,0 +1,21 @@
+import Foundation
+var input = readLine()!.components(separatedBy: " ").map{$0}
+var N = Int(input[0])!
+var K = Int(input[1])!
+
+var arr: [Int] = []
+
+for i in (1...N) {
+    if N % i == 0 {
+        arr.append(i)
+    }
+}
+if arr.count >= K {
+    print(arr[K-1])
+} else {
+    print(0)
+}
+
+
+
+
