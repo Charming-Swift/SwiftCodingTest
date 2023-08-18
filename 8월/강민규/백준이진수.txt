@@ -1,0 +1,18 @@
+import Foundation
+
+var t = Int(readLine()!)!
+
+for _ in (0..<t) {
+    var n = Int(readLine()!)!
+    var arr: [Int] = []
+    
+    while n > 0 {
+        arr.append(n % 2)
+        n = n / 2
+    }
+    arr.enumerated().forEach { i, v in
+        if v == 1 {
+            print(i, terminator: " ")
+        }
+    }
+}
