@@ -1,0 +1,38 @@
+import Foundation
+
+func main() {
+    var arr: [Int] = []
+    var sum = 0
+
+    (0..<9).forEach{ _ in
+        let input = Int(readLine()!)!
+        arr.append(input)
+    }
+
+
+    for i in (0..<9) {
+        for j in (i..<9) {
+            if i == j { continue }
+            let result = arr.reduce(0,+)
+            let a = arr[i]
+            let b = arr[j]
+            if result - a - b == 100 {
+                if i < j {
+                    arr.remove(at: j)
+                    arr.remove(at: i)
+                }
+                else if i > j {
+                    arr.remove(at: i)
+                    arr.remove(at: j)
+                }
+                
+                for k in arr.sorted() {
+                    print(k)
+                }
+                return
+            }
+        }
+    }
+}
+
+main()
