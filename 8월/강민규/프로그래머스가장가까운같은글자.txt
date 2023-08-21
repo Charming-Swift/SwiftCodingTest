@@ -1,0 +1,18 @@
+import Foundation
+
+func solution(_ s:String) -> [Int] {
+    var arr: [String] = s.map{String($0)}
+    var tmp: [String] = Array(repeating: "-1", count: arr.count)
+    var result: [Int] = Array(repeating: -1, count: arr.count)
+    
+    for (idx, value) in arr.enumerated() {
+        if tmp.contains(value) { 
+            var firstIdx = tmp.lastIndex(of: value)
+            var k = idx - firstIdx!
+            result[idx] = k
+        }
+        tmp[idx] = value 
+    }
+ 
+    return result
+}
