@@ -1,0 +1,17 @@
+import Foundation
+
+func solution(_ a:Int, _ b:Int, _ n:Int) -> Int {
+    var have = n
+    var drink = 0
+    
+    while have >= a {
+        var o = have / a
+        var i = o * b
+        
+        have -= o * a 
+        have += i 
+        drink += i
+    }
+    
+    return drink
+}
