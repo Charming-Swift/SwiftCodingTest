@@ -1,0 +1,18 @@
+import Foundation
+
+func solution(_ name:[String], _ yearning:[Int], _ photo:[[String]]) -> [Int] {
+    
+    var result: [Int] = []
+    
+    for i in photo {
+        var sum = 0
+        i.forEach { human in 
+            if let idx = name.firstIndex(of: human) {
+                sum += yearning[idx]
+            }
+        }
+        result.append(sum)
+    }
+    
+    return result
+}
