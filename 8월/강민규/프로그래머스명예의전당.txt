@@ -1,0 +1,21 @@
+import Foundation
+
+func solution(_ k:Int, _ score:[Int]) -> [Int] {
+    
+    var goat: [Int] = []
+    var result: [Int] = []
+    
+    for i in score {
+        goat.append(i)
+        
+        if goat.count > k {
+            goat = goat.sorted(by: >)
+            goat.removeLast()
+        }
+        
+        goat = goat.sorted(by: <)
+        result.append(goat[0])
+    }
+    
+    return result
+}
