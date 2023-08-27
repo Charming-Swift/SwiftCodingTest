@@ -1,0 +1,17 @@
+import Foundation
+
+func solution(_ k:Int, _ m:Int, _ score:[Int]) -> Int {
+    var arr = score.sorted(by: >)
+    var cnt = Int(score.count/m)
+    var sum = 0
+    var idx = 0
+    
+    for i in (0..<cnt) {
+        if idx+m <= score.count {
+            sum += arr[idx..<idx+m].last! * m 
+            idx += m
+        }
+    }
+
+    return sum
+}
