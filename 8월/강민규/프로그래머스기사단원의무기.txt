@@ -11,3 +11,42 @@ func solution(_ number:Int, _ limit:Int, _ power:Int) -> Int {
                 .map{ $0>limit ? power:$0 }
                 .reduce(0, +)  
 }
+
+// 2차 도전 (성공)
+import Foundation
+
+func solution(_ number:Int, _ limit:Int, _ power:Int) -> Int {
+    func getYakSoo(num: Int) -> Int {
+        var s: Set<Int> = []
+        for i in (1...Int(sqrt(Double(num)))) {
+            if num % i == 0 {
+                s.insert(i)
+                s.insert(num / i)
+            }
+        }
+        return s.count
+    }   
+    
+    return (1...number)
+                .map{ getYakSoo(num: $0) }
+                .map{ $0>limit ? power:$0 }
+                .reduce(0, +)  
+}
+
+// 다른사람 풀이
+import Foundation
+
+func solution(_ number:Int, _ limit:Int, _ power:Int) -> Int {
+    var attack = [Int](repeating: 0, count: number+1)
+
+    for i in 1...number {
+        var c = i
+
+        while c <= number {
+            attack[c] += 1
+            c += i
+        }
+    }
+    attack = attack.map { $0 > limit ? power : $0 }
+    return attack.reduce(0, +)
+}
