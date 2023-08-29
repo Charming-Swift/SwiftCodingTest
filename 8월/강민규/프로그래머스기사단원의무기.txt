@@ -1,0 +1,13 @@
+// 1차 실패 (시간 초과)
+import Foundation
+
+func solution(_ number:Int, _ limit:Int, _ power:Int) -> Int {
+    func getYakSoo(num: Int) -> Int {
+        return (1...num).filter{ num % $0 == 0 }.count
+    }   
+    
+    return (1...number)
+                .map{ getYakSoo(num: $0) }
+                .map{ $0>limit ? power:$0 }
+                .reduce(0, +)  
+}
