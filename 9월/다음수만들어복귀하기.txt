@@ -1,0 +1,17 @@
+import Foundation
+
+var front = 2
+var back = 6
+
+func sol(first: Int, second: Int, cnt: Int) -> Int {
+    var sum = first + second
+    if cnt != 0 && front == first && back == second {
+        return cnt
+    }
+    else {
+        return sol(first: second, second: sum % 10, cnt: cnt + 1)
+    }
+}
+
+print(sol(first: front, second: back, cnt: 0))
+
