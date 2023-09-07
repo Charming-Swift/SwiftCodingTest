@@ -1,0 +1,32 @@
+import Foundation
+
+func solution(_ babbling:[String]) -> Int {
+    var canSay = ["aya", "ye", "woo", "ma"]
+    var cantSay = ["ayaaya", "yeye", "woowoo", "mama"]
+    var result = 0
+    
+    for i in babbling {
+        var target = i
+        var cnt = 0
+        for word in canSay {
+            if target.contains(word) {
+                cnt += (i.count - target.components(separatedBy: word).joined().count)
+            }
+        }
+        
+        var isGo = true 
+        for word in cantSay {
+            if i.contains(word) {
+                isGo = false
+            } 
+        }
+        
+        if isGo {
+            if i.count == cnt {
+                result += 1
+            }
+        }
+    }
+    
+    return result
+}
